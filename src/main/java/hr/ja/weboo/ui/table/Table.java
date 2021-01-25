@@ -7,11 +7,9 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static j2html.TagCreator.*;
-import static j2html.TagCreator.thead;
 
 @Slf4j
 @Getter
@@ -19,7 +17,9 @@ import static j2html.TagCreator.thead;
 public class Table<T> extends Widget {
 
     private List<TableColumn<T>> columns = new ArrayList<>();
-    private List<T> data = new ArrayList<>();
+
+
+    private DataProvider<T> dataProvider;
 
     private String caption;
 
@@ -36,7 +36,8 @@ public class Table<T> extends Widget {
                                 each(columns, column -> th(column.header().label())))
                 ),
                 tbody(
-                        each(data, d -> tr(
+                        each(dataProvider()
+                                        .getData(0, 10), d -> tr(
                                 each(columns, c -> td(rawHtml(
                                         render(c, d))
                                 ))
@@ -61,9 +62,6 @@ public class Table<T> extends Widget {
         return apply.toString();
     }
 
-    public void addData(T... rowsData) {
-        data().addAll(Arrays.asList(rowsData));
-    }
 
 //    public Object renderCell(TableColumn<T> column, T data) {
 //        try {

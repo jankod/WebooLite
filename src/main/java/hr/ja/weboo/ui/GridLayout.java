@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class Layout extends Widget {
+public class GridLayout extends Widget {
+
 
     private String containerType = "container";
 
     private List<Row> rows = new ArrayList<>();
 
-    public Layout() {
+    public GridLayout() {
     }
 
     @Override
@@ -21,9 +22,16 @@ public class Layout extends Widget {
         return "";
     }
 
-    public Row newRow() {
-        return new Row();
+    public Row addRow() {
+        Row row = new Row();
+        rows.add(row);
+        return row;
     }
+
+    public Row row() {
+        return addRow();
+    }
+
 
     @Data
     public static class Row {
@@ -40,26 +48,31 @@ public class Layout extends Widget {
         public String classes() {
             return "row";
         }
+
+        public Row cols(Object... widgets) {
+            return this;
+        }
+
+        public Col getCol(int colIndex) {
+            return columns.get(colIndex);
+        }
     }
 
     @Data
-    public static class Col {
+    public static class Col extends CssHasSize {
+
 
         private List<Widget> widgets = new ArrayList<>();
+
+        public String classes() {
+            return "col";
+        }
+
+        public Col style(Css.Size size) {
+            this.size(size);
+            return this;
+        }
     }
 
-    public static void main(String[] args) {
 
-        String grid = """
-                <div class="row">
-                    <div class="col">
-                      1 of 2
-                    </div>
-                    <div class="col">
-                      2 of 2
-                    </div>
-                  </div>
-                """;
-
-    }
 }

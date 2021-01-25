@@ -9,6 +9,7 @@ public class Request {
     private static ThreadLocal<Request> requestThreadLocal = new InheritableThreadLocal<>();
 
     private Context context;
+
     private Request() {
     }
 
@@ -17,6 +18,7 @@ public class Request {
         request.context(c);
         requestThreadLocal.set(request);
     }
+
     public static Request get() {
         return requestThreadLocal.get();
     }

@@ -1,7 +1,8 @@
-@import hr.ja.weboo.ui.Layout
+@import hr.ja.weboo.ui.GridLayout
+@import hr.ja.weboo.ui.GridLayout
 @import hr.ja.weboo.ui.Page
 
-@param Layout layout
+@param hr.ja.weboo.ui.GridLayout columnsLayout
 @param Page page
 
 

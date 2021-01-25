@@ -5,6 +5,7 @@ public class ClientEvent {
 
     }
 
-    public void goTo(Class<? extends Page> page) {
+    public JsGotoAction goTo(Class<? extends Page> page) {
+        return new JsGotoAction(page);
     }
 }

@@ -56,7 +56,7 @@ public class Weboo {
         {
             conf.addStaticFiles("/public");
         }).start(port);
-        log.info("http://localhost:"+port);
+        log.info("Start web http://localhost:"+port);
 
         for (Class<? extends Page> page : pages) {
             Route route = page.getAnnotation(Route.class);
@@ -64,8 +64,8 @@ public class Weboo {
             app.get(route.value(), new Handler() {
                 @Override
                 public void handle(@NotNull Context ctx) throws Exception {
+                    Request.addContext(ctx);
                     Page pageInstance = page.getConstructor().newInstance();
-                    pageInstance.doGet();
                     ctx.render("layout.jte", Collections.singletonMap("page", pageInstance));
                 }
             });

@@ -20,7 +20,7 @@ public abstract class Page {
         return this;
     }
 
-    public abstract void doGet();
+   // public abstract void doGet();
 
     public String toHtml() {
         String h = "";
