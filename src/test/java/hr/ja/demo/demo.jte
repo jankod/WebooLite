@@ -18,7 +18,7 @@ $unsafe{user.opet()}
 
 <script>
     function delaj() {
-        document.getElementById("pero").innerHTML="sfsdf";
+        document.getElementById("pero").innerHTML = "sfsdf";
     }
 </script>
 </body>

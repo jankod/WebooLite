@@ -13,6 +13,7 @@ public class HomePage extends Page {
 
     public HomePage() {
         add(new Label("Ovo je home page <b>"));
+
     }
 
     public static void main(String[] args) {
