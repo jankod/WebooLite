@@ -32,7 +32,6 @@ public class GridLayout extends Widget {
         return addRow();
     }
 
-
     @Data
     public static class Row {
         private List<Col> columns = new ArrayList<>();

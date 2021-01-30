@@ -10,6 +10,7 @@ public class StartWeboo {
 
         Weboo weboo = new Weboo();
         weboo.addPage(PageTable.class);
+        weboo.addPage(Page1.class);
         weboo.start(8090);
 
 

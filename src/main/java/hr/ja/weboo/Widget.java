@@ -34,5 +34,10 @@ public abstract class Widget {
 
     public abstract String toHtml();
 
+    public String toString() {
+
+        return "";
+    }
+
 
 }

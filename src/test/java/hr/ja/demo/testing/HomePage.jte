@@ -1,15 +1,11 @@
 @import hr.ja.demo.testing.HomePage
 @param HomePage page
-<html>
 
+<div>
+    Tittle ${page.title()}
 
-<body>
-Tittle ${page.title()}
-
-<br>
-@for(hr.ja.weboo.Widget w:  page.widgetList())
-    $unsafe{w.toHtml()}
-@endfor
-
-</body>
-</html>
+    <br>
+    @for(hr.ja.weboo.Widget w:  page.widgets())
+        $unsafe{w.toHtml()}
+    @endfor
+</div>

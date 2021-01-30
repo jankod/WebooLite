@@ -2,16 +2,19 @@ package hr.ja.weboo;
 
 import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
-import gg.jte.resolve.DirectoryCodeResolver;
+import gg.jte.html.HtmlTemplateOutput;
+import gg.jte.output.StringOutput;
 import hr.ja.weboo.ui.Page;
 import hr.ja.weboo.ui.Route;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.plugin.rendering.template.JavalinJte;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 
+import java.net.URL;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,17 +31,43 @@ public class Weboo {
     private Javalin app;
     private List<Class<? extends Page>> pages = new ArrayList<>();
 
+
+    private static Weboo instance;
+    TemplateEngine templateEngine = createTemplateEngine();
+    MyJteCodeResolver codeResolver = new MyJteCodeResolver();
+
     public Weboo(Class<? extends Page>... pagesArray) {
+
         pages.addAll(Arrays.asList(pagesArray));
-        JavalinJte.configure(createTemplateEngine());
+        JavalinJte.configure(templateEngine);
+        instance = this;
+    }
 
+    public static Weboo getInstance() {
+        HtmlTemplateOutput o;
+        return instance;
+    }
 
+    @SneakyThrows
+    public static String jteParseThis(Page page) {
+        String name = page.getClass().getSimpleName() + ".jte";
+        log.debug("Load name: {}", name);
+        URL resource = page.getClass().getResource(name);
+        if(resource == null) {
+            String msg = "Not find resource " + name;
+            log.warn(msg);
+            return msg;
+        }
+        StringOutput output = new StringOutput();
+        instance.templateEngine.render(resource.toURI().getPath(), page, output);
+        return output.toString();
     }
 
     private TemplateEngine createTemplateEngine() {
         if (debug) {
-            DirectoryCodeResolver codeResolver = new DirectoryCodeResolver(Path.of("src", "main", "jte"));
             return TemplateEngine.create(codeResolver, ContentType.Html);
+            //DirectoryCodeResolver codeResolver = new DirectoryCodeResolver(Path.of("src", "main", "jte"));
+            //return TemplateEngine.create(codeResolver, ContentType.Html);
         } else {
             return TemplateEngine.createPrecompiled(Path.of("jte-classes"), ContentType.Html);
         }
