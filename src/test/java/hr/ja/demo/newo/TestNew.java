@@ -1,6 +1,5 @@
 package hr.ja.demo.newo;
 
-import gg.jte.Content;
 import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.TemplateOutput;
@@ -41,13 +40,13 @@ public class TestNew {
         String name = clazz.getSimpleName() + ".jte";
         InputStream resourceAsStream = clazz.getResourceAsStream(name);
         if (resourceAsStream == null) {
-            throw new RuntimeException("Not find " + name);
+            throw new RuntimeException("Not find template " + name);
         }
         return IOUtils.toString(resourceAsStream, StandardCharsets.UTF_8);
     }
 
     @SneakyThrows
-    public static void writeContent(Content content, TemplateOutput output) {
+    public static void writeWidget(Widget content, TemplateOutput output) {
         String template = getTemplate(content.getClass());
         String name = content.getClass().getName();
         codeResolver.addCode(name, template);

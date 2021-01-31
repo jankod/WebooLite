@@ -5,6 +5,5 @@
 </div>
 <div>
     Ovo je label ${page.myLabel}
-
 </div>
-<%--<p>$unsafe{page.myLabel}</p>--%>
+

@@ -8,6 +8,6 @@ public class MyPage {
     public MyLabel myLabel;
 
     MyPage() {
-        myLabel = new MyLabel("labela < >");
+        myLabel = new MyLabel("labela <br>");
     }
 }
