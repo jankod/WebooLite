@@ -15,7 +15,7 @@ public class Request {
 
     protected static void addContext(Context c) {
         Request request = new Request();
-        request.context(c);
+        request.setContext(c);
         requestThreadLocal.set(request);
     }
 

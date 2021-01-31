@@ -1,9 +1,8 @@
 package hr.ja.weboo.ui;
 
-import hr.ja.weboo.Widget;
 import lombok.Getter;
 
-public class Label extends Widget {
+public class Label implements JteWidget {
 
     @Getter
     private String text;
@@ -12,8 +11,4 @@ public class Label extends Widget {
         this.text = text;
     }
 
-    @Override
-    public String toHtml() {
-        return "<div>%s</div>".formatted(text);
-    }
 }

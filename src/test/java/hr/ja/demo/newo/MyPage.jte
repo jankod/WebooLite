@@ -4,6 +4,6 @@
     Ovo je my page
 </div>
 <div>
-    Ovo je label ${page.myLabel}
+    Ovo je label ${page.getMyLabel()}
 </div>
 

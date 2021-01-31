@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class MyPage {
 
-    public MyLabel myLabel;
+    MyLabel myLabel;
 
     MyPage() {
         myLabel = new MyLabel("labela <br>");

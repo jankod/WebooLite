@@ -5,13 +5,16 @@ import gg.jte.CodeResolver;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyJteCodeResolver implements CodeResolver {
+public class JteCodeResolverFromClass implements CodeResolver {
 
 
     private Map<String, String> source = new HashMap<>();
 
-    public void addCode(String name, String code) {
-        source.put(name, code);
+    //private Map<String, Boolean> hasChange = new HashMap<>();
+
+
+    public void addTemplate(String name, String template) {
+        source.put(name, template);
     }
 
     @Override

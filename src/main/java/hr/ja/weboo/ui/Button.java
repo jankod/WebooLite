@@ -1,13 +1,13 @@
 package hr.ja.weboo.ui;
 
-import hr.ja.weboo.Widget;
+import hr.ja.weboo.HtmlWidget;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class Button extends Widget {
+public class Button implements HtmlWidget {
 
     private String label;
     private ButtonStyle style = ButtonStyle.DEFAULT;
@@ -29,12 +29,15 @@ public class Button extends Widget {
         return clientEvent;
     }
 
-
     @Override
     public String toHtml() {
-        return "";
+        return "<button>" + label + "</button>";
     }
 
-//    public Button(String label, AjaxEvent buttonClick) {
+//    @SneakyThrows
+//    @Override
+//    public void writeTo(TemplateOutput output) {
+//        output.writeUserContent("<button>" + label + "</button>");
+//
 //    }
 }

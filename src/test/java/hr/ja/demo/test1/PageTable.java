@@ -1,9 +1,10 @@
-package hr.ja.demo;
+package hr.ja.demo.test1;
 
 
 import hr.ja.weboo.Request;
-import hr.ja.weboo.ui.*;
-import hr.ja.weboo.ui.table.CollectionDataProvider;
+import hr.ja.weboo.ui.Button;
+import hr.ja.weboo.ui.Page;
+import hr.ja.weboo.ui.Route;
 import hr.ja.weboo.ui.table.Table;
 import io.javalin.http.Context;
 import lombok.Getter;
@@ -29,17 +30,17 @@ public class PageTable extends Page {
             """;
 
     private Table<User> userTable = new Table<>();
+
     public PageTable() {
-        title("Users");
+        setTitle("Users");
 
-
-        userTable.caption("Ovo je tabela");
-        userTable.column("ID").renderer(User::getId);
-        userTable.column("Name").renderer(User::getName);
-        userTable.column("Action").renderer(user -> {
+        userTable.caption("Ovo je tabela")
+                .column("ID").setRenderer(User::getId);
+        userTable.column("Name").setRenderer(User::getName);
+        userTable.column("Action").setRenderer(user -> {
             Button btn = new Button("Edit");
             btn.on("click").goTo(PageTable.class).params("userId", user.getId());
-            btn.style().theme(primary);
+            btn.getStyle().setTheme(primary);
             return btn;
         });
 
@@ -49,8 +50,7 @@ public class PageTable extends Page {
             data.add(new User(i, "user " + i));
         }
 
-        userTable.dataProvider(new CollectionDataProvider<>(data));
-
+        userTable.setData(data);
 
         @Language("InjectedFreeMarker")
         String html = """
@@ -59,18 +59,13 @@ public class PageTable extends Page {
                     <div class='col'></div>
                 </div>
                 """;
-        template(html);
-
         add(userTable);
-
     }
 
-    private void template(String s) {
-    }
 
     @Route("/users/edit")
     public static void editRow() {
-        Context context = Request.get().context();
+        Context context = Request.get().getContext();
         String userId = context.pathParam("userId");
         log.debug("click userId {}", userId);
 

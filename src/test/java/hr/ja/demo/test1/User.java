@@ -1,4 +1,4 @@
-package hr.ja.demo;
+package hr.ja.demo.test1;
 
 import lombok.Data;
 import org.intellij.lang.annotations.Language;

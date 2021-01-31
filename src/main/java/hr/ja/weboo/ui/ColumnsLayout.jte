@@ -1,4 +1,4 @@
-@import hr.ja.weboo.Widget
+@import hr.ja.weboo.HtmlWidget
 @import hr.ja.weboo.ui.GridLayout
 @param GridLayout root
 
@@ -7,7 +7,7 @@
         <div class="row">
             @for(GridLayout.Col col: row.columns())
                 <div class="${col.classes()}">
-                    @for(Widget w: col.widgets())
+                    @for(HtmlWidget w: col.widgets())
                         ${w.toHtml()}
                     @endfor
                 </div>

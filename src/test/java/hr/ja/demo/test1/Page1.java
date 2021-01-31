@@ -1,4 +1,4 @@
-package hr.ja.demo;
+package hr.ja.demo.test1;
 
 import hr.ja.weboo.ui.Label;
 import hr.ja.weboo.ui.Page;
@@ -9,10 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Route("/p1")
 @Getter
-public class Page1  extends Page {
+public class Page1 extends Page {
+    Label label = new Label("ovo je label");
 
     public Page1() {
-        add(new Label("Ovo je pero"));
-    }
 
+    }
 }
