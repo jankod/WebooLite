@@ -13,6 +13,7 @@ public class StartWeboo {
                 .builder()
                 //.page(PageTable.class)
                 .page(Page1.class)
+                .page(PageHtml.class)
                 .layout(Bootstrap5Layout.class)
                 .port(9000)
                 .debug(true)

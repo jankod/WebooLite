@@ -5,3 +5,10 @@
 <div>
     ${page.getLabel()}
 </div>
+
+<div>
+    <p>HTML</p>
+    <div>
+        ${page.getHtml()}
+    </div>
+</div>

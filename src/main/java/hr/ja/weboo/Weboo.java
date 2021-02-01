@@ -75,15 +75,19 @@ public class Weboo {
                 @Override
                 public void handle(@NotNull Context ctx) throws Exception {
                     Request.addContext(ctx);
-                    Page pageInstance = page.getConstructor().newInstance();
+                    Constructor<? extends Page> constructor = page.getConstructor();
+                    constructor.setAccessible(true);
+                    Page pageInstance = constructor.newInstance();
 
                     Constructor<? extends Layout> constructorLayout = config.getLayout().getConstructor(Page.class);
                     Layout layout = constructorLayout.newInstance(pageInstance);
                     log.debug("layout class  {}", layout.getClass());
                     if (layout instanceof JteWidget) {
-
                         String html = renderJte((JteWidget) layout);
                         ctx.html(html);
+                    }else {
+                        // html layout
+                        ctx.html(layout.toString());
                     }
                     //ctx.render("layout.jte", Collections.singletonMap("page", pageInstance));
                 }
@@ -100,7 +104,7 @@ public class Weboo {
 
         instance.templateEngine.render(name, widget, output1);
         String html = output1.toString();
-//        log.debug("name {} html '{}'", name, html);
+      //  log.debug("name {} html '{}'", name, html);
         return html;
     }
 
@@ -122,12 +126,6 @@ public class Weboo {
 
     @SneakyThrows
     public static void writeWidget(JteWidget content, TemplateOutput output) {
-//        String template = instance.getJteTemplate(content.getClass());
-//        String name = content.getClass().getName();
-//        instance.codeResolver.addTemplate(name, template);
-//        StringOutput output1 = new StringOutput();
-//        instance.templateEngine.render(name, content, output1);
-//        String value = output1.toString();
         String html = instance.renderJte(content);
         output.getWriter().write(html);
 

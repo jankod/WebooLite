@@ -1,18 +1,17 @@
 package hr.ja.weboo;
 
+import gg.jte.Content;
+import gg.jte.TemplateOutput;
 import hr.ja.weboo.ui.Widget;
+import lombok.SneakyThrows;
 
-public interface HtmlWidget extends Widget {
+public interface HtmlWidget extends Widget, Content {
 
-//    @Override
-//    default void writeTo(TemplateOutput output) {
-//        Weboo.writeWidget(this, output);
-//    }
+    @SneakyThrows
+    default void writeTo(TemplateOutput output) {
+        output.getWriter().write(toHtml());
+    }
 
     String toHtml();
-//    public String toString() {
-//        return "";
-//    }
-
 
 }

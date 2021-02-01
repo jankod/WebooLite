@@ -21,14 +21,6 @@ import static hr.ja.weboo.ui.Css.ThemeColor.primary;
 @Getter
 public class PageTable extends Page {
 
-
-    @Language("InjectedFreeMarker")
-    final static String t = """
-            <div>
-            ${userTable}
-            </div>
-            """;
-
     private Table<User> userTable = new Table<>();
 
     public PageTable() {
